@@ -76,12 +76,12 @@ abstract class RetailAccountDtoAbstract implements DataTransferObjectInterface
     private $rtpEncryption = false;
 
     /**
-     * @var boolean
+     * @var bool
      */
     private $multiContact = true;
 
     /**
-     * @var integer
+     * @var int
      */
     private $id;
 
@@ -425,11 +425,11 @@ abstract class RetailAccountDtoAbstract implements DataTransferObjectInterface
     }
 
     /**
-     * @param boolean $multiContact
+     * @param bool $multiContact | null
      *
      * @return static
      */
-    public function setMultiContact($multiContact = null)
+    public function setMultiContact(?bool $multiContact = null): self
     {
         $this->multiContact = $multiContact;
 
@@ -437,16 +437,15 @@ abstract class RetailAccountDtoAbstract implements DataTransferObjectInterface
     }
 
     /**
-     * @return boolean | null
+     * @return bool | null
      */
-    public function getMultiContact()
+    public function getMultiContact(): ?bool
     {
         return $this->multiContact;
     }
 
     /**
-     * @param integer $id
-     *
+     * @param int $id | null
      *
      * @return static
      */

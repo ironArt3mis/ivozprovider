@@ -19,7 +19,7 @@ abstract class TerminalDtoAbstract implements DataTransferObjectInterface
     use DtoNormalizer;
 
     /**
-     * @var string | null
+     * @var string
      */
     private $name;
 

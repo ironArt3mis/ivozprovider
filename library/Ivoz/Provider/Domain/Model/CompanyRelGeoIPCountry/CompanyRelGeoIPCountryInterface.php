@@ -20,18 +20,18 @@ interface CompanyRelGeoIPCountryInterface extends LoggableEntityInterface
     /**
      * Set company
      *
-     * @param CompanyInterface
+     * @param CompanyInterface | null
      *
      * @return static
      */
-    public function setCompany(CompanyInterface $company): CompanyRelGeoIPCountryInterface;
+    public function setCompany(?CompanyInterface $company = null): CompanyRelGeoIPCountryInterface;
 
     /**
      * Get company
      *
-     * @return CompanyInterface
+     * @return CompanyInterface | null
      */
-    public function getCompany(): CompanyInterface;
+    public function getCompany(): ?CompanyInterface;
 
     /**
      * Get country

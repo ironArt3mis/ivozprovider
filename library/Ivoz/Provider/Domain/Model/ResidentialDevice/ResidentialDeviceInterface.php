@@ -260,7 +260,7 @@ interface ResidentialDeviceInterface extends LoggableEntityInterface
     /**
      * Get multiContact
      *
-     * @return boolean
+     * @return bool
      */
     public function getMultiContact(): bool;
 

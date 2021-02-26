@@ -16,6 +16,7 @@ use Ivoz\Provider\Domain\Model\RatingProfile\RatingProfileInterface;
 use Ivoz\Provider\Domain\Model\MusicOnHold\MusicOnHoldInterface;
 use Ivoz\Provider\Domain\Model\Recording\RecordingInterface;
 use Ivoz\Provider\Domain\Model\FeaturesRelCompany\FeaturesRelCompanyInterface;
+use Ivoz\Provider\Domain\Model\CompanyRelGeoIPCountry\CompanyRelGeoIPCountryInterface;
 use Ivoz\Provider\Domain\Model\CompanyRelCodec\CompanyRelCodecInterface;
 use Ivoz\Provider\Domain\Model\CompanyRelRoutingTag\CompanyRelRoutingTagInterface;
 
@@ -86,6 +87,13 @@ trait CompanyTrait
 
     /**
      * @var ArrayCollection
+     * CompanyRelGeoIPCountryInterface mappedBy company
+     * orphanRemoval
+     */
+    protected $relCountries;
+
+    /**
+     * @var ArrayCollection
      * CompanyRelCodecInterface mappedBy company
      * orphanRemoval
      */
@@ -113,6 +121,7 @@ trait CompanyTrait
         $this->musicsOnHold = new ArrayCollection();
         $this->recordings = new ArrayCollection();
         $this->relFeatures = new ArrayCollection();
+        $this->relCountries = new ArrayCollection();
         $this->relCodecs = new ArrayCollection();
         $this->relRoutingTags = new ArrayCollection();
     }
@@ -200,6 +209,14 @@ trait CompanyTrait
             $self->replaceRelFeatures(
                 $fkTransformer->transformCollection(
                     $dto->getRelFeatures()
+                )
+            );
+        }
+
+        if (!is_null($dto->getRelCountries())) {
+            $self->replaceRelCountries(
+                $fkTransformer->transformCollection(
+                    $dto->getRelCountries()
                 )
             );
         }
@@ -308,6 +325,14 @@ trait CompanyTrait
             $this->replaceRelFeatures(
                 $fkTransformer->transformCollection(
                     $dto->getRelFeatures()
+                )
+            );
+        }
+
+        if (!is_null($dto->getRelCountries())) {
+            $this->replaceRelCountries(
+                $fkTransformer->transformCollection(
+                    $dto->getRelCountries()
                 )
             );
         }
@@ -1045,6 +1070,83 @@ trait CompanyTrait
         }
 
         return $this->relFeatures->toArray();
+    }
+
+    /**
+     * Add relCountry
+     *
+     * @param CompanyRelGeoIPCountryInterface $relCountry
+     *
+     * @return static
+     */
+    public function addRelCountry(CompanyRelGeoIPCountryInterface $relCountry): CompanyInterface
+    {
+        $this->relCountries->add($relCountry);
+
+        return $this;
+    }
+
+    /**
+     * Remove relCountry
+     *
+     * @param CompanyRelGeoIPCountryInterface $relCountry
+     *
+     * @return static
+     */
+    public function removeRelCountry(CompanyRelGeoIPCountryInterface $relCountry): CompanyInterface
+    {
+        $this->relCountries->removeElement($relCountry);
+
+        return $this;
+    }
+
+    /**
+     * Replace relCountries
+     *
+     * @param ArrayCollection $relCountries of CompanyRelGeoIPCountryInterface
+     *
+     * @return static
+     */
+    public function replaceRelCountries(ArrayCollection $relCountries): CompanyInterface
+    {
+        $updatedEntities = [];
+        $fallBackId = -1;
+        foreach ($relCountries as $entity) {
+            $index = $entity->getId() ? $entity->getId() : $fallBackId--;
+            $updatedEntities[$index] = $entity;
+            $entity->setCompany($this);
+        }
+        $updatedEntityKeys = array_keys($updatedEntities);
+
+        foreach ($this->relCountries as $key => $entity) {
+            $identity = $entity->getId();
+            if (in_array($identity, $updatedEntityKeys)) {
+                $this->relCountries->set($key, $updatedEntities[$identity]);
+            } else {
+                $this->relCountries->remove($key);
+            }
+            unset($updatedEntities[$identity]);
+        }
+
+        foreach ($updatedEntities as $entity) {
+            $this->addRelCountry($entity);
+        }
+
+        return $this;
+    }
+
+    /**
+     * Get relCountries
+     * @param Criteria | null $criteria
+     * @return CompanyRelGeoIPCountryInterface[]
+     */
+    public function getRelCountries(Criteria $criteria = null): array
+    {
+        if (!is_null($criteria)) {
+            return $this->relCountries->matching($criteria)->toArray();
+        }
+
+        return $this->relCountries->toArray();
     }
 
     /**

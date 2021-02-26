@@ -290,9 +290,8 @@ abstract class TerminalAbstract
      *
      * @return static
      */
-    protected function setName(?string $name = null): TerminalInterface
+    protected function setName(string $name): TerminalInterface
     {
-        Assertion::notNull($name, 'name value "%s" is null, but non null value was expected.');
         Assertion::maxLength($name, 100, 'name value "%s" is too long, it should have no more than %d characters, but has %d characters.');
 
         $this->name = $name;

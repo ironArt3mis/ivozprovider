@@ -94,7 +94,7 @@ abstract class UserAbstract
     protected $rejectCallMethod = 'rfc';
 
     /**
-     * @var boolean
+     * @var bool
      */
     protected $voicemailEnabled = true;
 
@@ -114,7 +114,7 @@ abstract class UserAbstract
     protected $multiContact = true;
 
     /**
-     * @var boolean
+     * @var bool
      */
     protected $gsQRCode = false;
 
@@ -692,15 +692,18 @@ abstract class UserAbstract
      *
      * @return static
      */
-    protected function setRejectCallMethod($rejectCallMethod)
+    protected function setRejectCallMethod(string $rejectCallMethod): UserInterface
     {
-        Assertion::notNull($rejectCallMethod, 'rejectCallMethod value "%s" is null, but non null value was expected.');
         Assertion::maxLength($rejectCallMethod, 3, 'rejectCallMethod value "%s" is too long, it should have no more than %d characters, but has %d characters.');
-        Assertion::choice($rejectCallMethod, [
-            UserInterface::REJECTCALLMETHOD_RFC,
-            UserInterface::REJECTCALLMETHOD_486,
-            UserInterface::REJECTCALLMETHOD_600
-        ], 'rejectCallMethodvalue "%s" is not an element of the valid values: %s');
+        Assertion::choice(
+            $rejectCallMethod,
+            [
+                UserInterface::REJECTCALLMETHOD_RFC,
+                UserInterface::REJECTCALLMETHOD_486,
+                UserInterface::REJECTCALLMETHOD_600,
+            ],
+            'rejectCallMethodvalue "%s" is not an element of the valid values: %s'
+        );
 
         $this->rejectCallMethod = $rejectCallMethod;
 
@@ -801,13 +804,12 @@ abstract class UserAbstract
     /**
      * Set multiContact
      *
-     * @param boolean $multiContact
+     * @param bool $multiContact
      *
      * @return static
      */
-    protected function setMultiContact($multiContact)
+    protected function setMultiContact(bool $multiContact): UserInterface
     {
-        Assertion::notNull($multiContact, 'multiContact value "%s" is null, but non null value was expected.');
         Assertion::between(intval($multiContact), 0, 1, 'multiContact provided "%s" is not a valid boolean value.');
         $multiContact = (bool) $multiContact;
 
@@ -819,7 +821,7 @@ abstract class UserAbstract
     /**
      * Get multiContact
      *
-     * @return boolean
+     * @return bool
      */
     public function getMultiContact(): bool
     {

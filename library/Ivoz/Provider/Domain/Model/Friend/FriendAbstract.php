@@ -137,12 +137,13 @@ abstract class FriendAbstract
     protected $rtpEncryption = false;
 
     /**
-     * @var boolean
+     * @var bool
      */
     protected $multiContact = true;
 
     /**
-     * @var \Ivoz\Provider\Domain\Model\Company\CompanyInterface
+     * @var CompanyInterface
+     * inversedBy friends
      */
     protected $company;
 
@@ -387,6 +388,7 @@ abstract class FriendAbstract
             ->setT38Passthrough(self::getT38Passthrough())
             ->setAlwaysApplyTransformations(self::getAlwaysApplyTransformations())
             ->setRtpEncryption(self::getRtpEncryption())
+            ->setMultiContact(self::getMultiContact())
             ->setCompany(Company::entityToDto(self::getCompany(), $depth))
             ->setDomain(Domain::entityToDto(self::getDomain(), $depth))
             ->setTransformationRuleSet(TransformationRuleSet::entityToDto(self::getTransformationRuleSet(), $depth))
@@ -994,13 +996,12 @@ abstract class FriendAbstract
     /**
      * Set multiContact
      *
-     * @param boolean $multiContact
+     * @param bool $multiContact
      *
      * @return static
      */
-    protected function setMultiContact($multiContact)
+    protected function setMultiContact(bool $multiContact): FriendInterface
     {
-        Assertion::notNull($multiContact, 'multiContact value "%s" is null, but non null value was expected.');
         Assertion::between(intval($multiContact), 0, 1, 'multiContact provided "%s" is not a valid boolean value.');
         $multiContact = (bool) $multiContact;
 
@@ -1012,7 +1013,7 @@ abstract class FriendAbstract
     /**
      * Get multiContact
      *
-     * @return boolean
+     * @return bool
      */
     public function getMultiContact(): bool
     {

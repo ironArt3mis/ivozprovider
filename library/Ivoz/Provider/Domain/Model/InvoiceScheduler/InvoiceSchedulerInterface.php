@@ -2,6 +2,7 @@
 
 namespace Ivoz\Provider\Domain\Model\InvoiceScheduler;
 
+use Ivoz\Core\Domain\Model\SchedulerInterface;
 use Ivoz\Provider\Domain\Model\InvoiceTemplate\InvoiceTemplateInterface;
 use Ivoz\Provider\Domain\Model\Brand\BrandInterface;
 use Ivoz\Provider\Domain\Model\Company\CompanyInterface;
@@ -14,7 +15,7 @@ use Ivoz\Core\Domain\Model\LoggableEntityInterface;
 /**
 * InvoiceSchedulerInterface
 */
-interface InvoiceSchedulerInterface extends LoggableEntityInterface
+interface InvoiceSchedulerInterface extends SchedulerInterface, LoggableEntityInterface
 {
     const UNIT_WEEK = 'week';
 

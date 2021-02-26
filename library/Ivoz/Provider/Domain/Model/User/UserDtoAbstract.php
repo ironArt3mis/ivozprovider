@@ -78,7 +78,7 @@ abstract class UserDtoAbstract implements DataTransferObjectInterface
     private $rejectCallMethod = 'rfc';
 
     /**
-     * @var boolean
+     * @var bool
      */
     private $voicemailEnabled = true;
 
@@ -98,7 +98,7 @@ abstract class UserDtoAbstract implements DataTransferObjectInterface
     private $multiContact = true;
 
     /**
-     * @var boolean
+     * @var bool
      */
     private $gsQRCode = false;
 
@@ -462,11 +462,11 @@ abstract class UserDtoAbstract implements DataTransferObjectInterface
     }
 
     /**
-     * @param string $rejectCallMethod
+     * @param string $rejectCallMethod | null
      *
      * @return static
      */
-    public function setRejectCallMethod($rejectCallMethod = null)
+    public function setRejectCallMethod(?string $rejectCallMethod = null): self
     {
         $this->rejectCallMethod = $rejectCallMethod;
 
@@ -476,13 +476,13 @@ abstract class UserDtoAbstract implements DataTransferObjectInterface
     /**
      * @return string | null
      */
-    public function getRejectCallMethod()
+    public function getRejectCallMethod(): ?string
     {
         return $this->rejectCallMethod;
     }
 
     /**
-     * @param boolean $voicemailEnabled
+     * @param bool $voicemailEnabled | null
      *
      * @return static
      */
@@ -542,11 +542,11 @@ abstract class UserDtoAbstract implements DataTransferObjectInterface
     }
 
     /**
-     * @param boolean $multiContact
+     * @param bool $multiContact | null
      *
      * @return static
      */
-    public function setMultiContact($multiContact = null)
+    public function setMultiContact(?bool $multiContact = null): self
     {
         $this->multiContact = $multiContact;
 
@@ -554,15 +554,15 @@ abstract class UserDtoAbstract implements DataTransferObjectInterface
     }
 
     /**
-     * @return boolean | null
+     * @return bool | null
      */
-    public function getMultiContact()
+    public function getMultiContact(): ?bool
     {
         return $this->multiContact;
     }
 
     /**
-     * @param boolean $gsQRCode
+     * @param bool $gsQRCode | null
      *
      * @return static
      */

@@ -158,7 +158,7 @@ abstract class CompanyRelGeoIPCountryAbstract
     protected function __toArray()
     {
         return [
-            'companyId' => self::getCompany()->getId(),
+            'companyId' => self::getCompany() ? self::getCompany()->getId() : null,
             'countryId' => self::getCountry()->getId()
         ];
     }
@@ -166,11 +166,11 @@ abstract class CompanyRelGeoIPCountryAbstract
     /**
      * Set company
      *
-     * @param CompanyInterface
+     * @param CompanyInterface | null
      *
      * @return static
      */
-    public function setCompany(CompanyInterface $company): CompanyRelGeoIPCountryInterface
+    public function setCompany(?CompanyInterface $company = null): CompanyRelGeoIPCountryInterface
     {
         $this->company = $company;
 
@@ -180,9 +180,9 @@ abstract class CompanyRelGeoIPCountryAbstract
     /**
      * Get company
      *
-     * @return CompanyInterface
+     * @return CompanyInterface | null
      */
-    public function getCompany(): CompanyInterface
+    public function getCompany(): ?CompanyInterface
     {
         return $this->company;
     }

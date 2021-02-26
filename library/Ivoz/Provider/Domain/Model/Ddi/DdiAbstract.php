@@ -862,11 +862,11 @@ abstract class DdiAbstract
     /**
      * Set country
      *
-     * @param CountryInterface
+     * @param CountryInterface | null
      *
      * @return static
      */
-    protected function setCountry(CountryInterface $country): DdiInterface
+    protected function setCountry(?CountryInterface $country = null): DdiInterface
     {
         $this->country = $country;
 
@@ -876,9 +876,9 @@ abstract class DdiAbstract
     /**
      * Get country
      *
-     * @return \Ivoz\Provider\Domain\Model\Country\CountryInterface | null
+     * @return CountryInterface | null
      */
-    public function getCountry(): CountryInterface
+    public function getCountry(): ?CountryInterface
     {
         return $this->country;
     }

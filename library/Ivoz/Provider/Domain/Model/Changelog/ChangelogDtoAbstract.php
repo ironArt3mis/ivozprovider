@@ -208,7 +208,7 @@ abstract class ChangelogDtoAbstract implements DataTransferObjectInterface
      *
      * @return static
      */
-    public function setId(?string $id = null): self
+    public function setId($id = null): self
     {
         $this->id = $id;
 

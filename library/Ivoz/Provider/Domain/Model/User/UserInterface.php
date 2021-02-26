@@ -34,9 +34,10 @@ interface UserInterface extends LoggableEntityInterface
     const EXTERNALIPCALLS_3 = '3';
 
     const REJECTCALLMETHOD_RFC = 'rfc';
-    const REJECTCALLMETHOD_486 = '486';
-    const REJECTCALLMETHOD_600 = '600';
 
+    const REJECTCALLMETHOD_486 = '486';
+
+    const REJECTCALLMETHOD_600 = '600';
 
     /**
      * @return array
@@ -91,7 +92,7 @@ interface UserInterface extends LoggableEntityInterface
      */
     public function getOutgoingDdi(): ?DdiInterface;
 
-    public function setOutgoingDdi(\Ivoz\Provider\Domain\Model\Ddi\DdiInterface $outgoingDdi = null);
+    public function setOutgoingDdi(?DdiInterface $outgoingDdi = null): UserInterface;
 
     /**
      * Get User outgoingDdiRule
@@ -251,7 +252,7 @@ interface UserInterface extends LoggableEntityInterface
     /**
      * Get multiContact
      *
-     * @return boolean
+     * @return bool
      */
     public function getMultiContact(): bool;
 

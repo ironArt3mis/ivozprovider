@@ -253,7 +253,7 @@ abstract class BannedAddressAbstract
                 [
                     BannedAddressInterface::BLOCKER_ANTIFLOOD,
                     BannedAddressInterface::BLOCKER_IPFILTER,
-                    BannedAddressInterface::BLOCKER_ANTIBRUTEFORCE
+                    BannedAddressInterface::BLOCKER_ANTIBRUTEFORCE,
                 ],
                 'blockervalue "%s" is not an element of the valid values: %s'
             );

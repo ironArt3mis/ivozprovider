@@ -2,11 +2,11 @@
 
 namespace Ivoz\Provider\Domain\Model\Extension;
 
+use Ivoz\Provider\Domain\Model\User\UserInterface;
 use Ivoz\Provider\Domain\Model\Company\CompanyInterface;
 use Ivoz\Provider\Domain\Model\Ivr\IvrInterface;
 use Ivoz\Provider\Domain\Model\HuntGroup\HuntGroupInterface;
 use Ivoz\Provider\Domain\Model\ConferenceRoom\ConferenceRoomInterface;
-use Ivoz\Provider\Domain\Model\User\UserInterface;
 use Ivoz\Provider\Domain\Model\Queue\QueueInterface;
 use Ivoz\Provider\Domain\Model\ConditionalRoute\ConditionalRouteInterface;
 use Ivoz\Provider\Domain\Model\Country\CountryInterface;
@@ -41,7 +41,7 @@ interface ExtensionInterface extends LoggableEntityInterface
      */
     public function getChangeSet();
 
-    public function setUser(\Ivoz\Provider\Domain\Model\User\UserInterface $user = null);
+    public function setUser(?UserInterface $user = null): ExtensionInterface;
 
     /**
      * {@inheritDoc}

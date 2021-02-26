@@ -2,6 +2,7 @@
 
 namespace Ivoz\Provider\Domain\Model\CallCsvScheduler;
 
+use Ivoz\Core\Domain\Model\SchedulerInterface;
 use Ivoz\Provider\Domain\Model\Brand\BrandInterface;
 use Ivoz\Provider\Domain\Model\Company\CompanyInterface;
 use Ivoz\Provider\Domain\Model\NotificationTemplate\NotificationTemplateInterface;
@@ -18,7 +19,7 @@ use Ivoz\Core\Domain\Model\LoggableEntityInterface;
 /**
 * CallCsvSchedulerInterface
 */
-interface CallCsvSchedulerInterface extends LoggableEntityInterface
+interface CallCsvSchedulerInterface extends SchedulerInterface, LoggableEntityInterface
 {
     const UNIT_DAY = 'day';
 

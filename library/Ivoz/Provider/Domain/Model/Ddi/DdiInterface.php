@@ -208,9 +208,9 @@ interface DdiInterface extends LoggableEntityInterface
     /**
      * Get country
      *
-     * @return CountryInterface
+     * @return CountryInterface | null
      */
-    public function getCountry(): CountryInterface;
+    public function getCountry(): ?CountryInterface;
 
     /**
      * Set residentialDevice

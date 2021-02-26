@@ -1387,7 +1387,7 @@ abstract class CompanyAbstract
      *
      * @return CountryInterface
      */
-    public function getCountry(): ?CountryInterface
+    public function getCountry(): CountryInterface
     {
         return $this->country;
     }

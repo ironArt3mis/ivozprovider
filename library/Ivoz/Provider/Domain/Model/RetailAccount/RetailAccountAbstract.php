@@ -87,12 +87,13 @@ abstract class RetailAccountAbstract
     protected $rtpEncryption = false;
 
     /**
-     * @var boolean
+     * @var bool
      */
     protected $multiContact = true;
 
     /**
-     * @var \Ivoz\Provider\Domain\Model\Brand\BrandInterface
+     * @var BrandInterface
+     * inversedBy residentialDevices
      */
     protected $brand;
 
@@ -285,6 +286,7 @@ abstract class RetailAccountAbstract
             ->setDdiIn(self::getDdiIn())
             ->setT38Passthrough(self::getT38Passthrough())
             ->setRtpEncryption(self::getRtpEncryption())
+            ->setMultiContact(self::getMultiContact())
             ->setBrand(Brand::entityToDto(self::getBrand(), $depth))
             ->setDomain(Domain::entityToDto(self::getDomain(), $depth))
             ->setCompany(Company::entityToDto(self::getCompany(), $depth))
@@ -648,13 +650,12 @@ abstract class RetailAccountAbstract
     /**
      * Set multiContact
      *
-     * @param boolean $multiContact
+     * @param bool $multiContact
      *
      * @return static
      */
-    protected function setMultiContact($multiContact)
+    protected function setMultiContact(bool $multiContact): RetailAccountInterface
     {
-        Assertion::notNull($multiContact, 'multiContact value "%s" is null, but non null value was expected.');
         Assertion::between(intval($multiContact), 0, 1, 'multiContact provided "%s" is not a valid boolean value.');
         $multiContact = (bool) $multiContact;
 
@@ -666,7 +667,7 @@ abstract class RetailAccountAbstract
     /**
      * Get multiContact
      *
-     * @return boolean
+     * @return bool
      */
     public function getMultiContact(): bool
     {

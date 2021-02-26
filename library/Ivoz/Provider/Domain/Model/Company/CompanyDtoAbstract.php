@@ -24,6 +24,7 @@ use Ivoz\Provider\Domain\Model\RatingProfile\RatingProfileDto;
 use Ivoz\Provider\Domain\Model\MusicOnHold\MusicOnHoldDto;
 use Ivoz\Provider\Domain\Model\Recording\RecordingDto;
 use Ivoz\Provider\Domain\Model\FeaturesRelCompany\FeaturesRelCompanyDto;
+use Ivoz\Provider\Domain\Model\CompanyRelGeoIPCountry\CompanyRelGeoIPCountryDto;
 use Ivoz\Provider\Domain\Model\CompanyRelCodec\CompanyRelCodecDto;
 use Ivoz\Provider\Domain\Model\CompanyRelRoutingTag\CompanyRelRoutingTagDto;
 
@@ -286,6 +287,11 @@ abstract class CompanyDtoAbstract implements DataTransferObjectInterface
     private $relFeatures;
 
     /**
+     * @var CompanyRelGeoIPCountryDto[] | null
+     */
+    private $relCountries;
+
+    /**
      * @var CompanyRelCodecDto[] | null
      */
     private $relCodecs;
@@ -410,6 +416,7 @@ abstract class CompanyDtoAbstract implements DataTransferObjectInterface
             'musicsOnHold' => $this->getMusicsOnHold(),
             'recordings' => $this->getRecordings(),
             'relFeatures' => $this->getRelFeatures(),
+            'relCountries' => $this->getRelCountries(),
             'relCodecs' => $this->getRelCodecs(),
             'relRoutingTags' => $this->getRelRoutingTags()
         ];
@@ -1810,6 +1817,26 @@ abstract class CompanyDtoAbstract implements DataTransferObjectInterface
     public function getRelFeatures(): ?array
     {
         return $this->relFeatures;
+    }
+
+    /**
+     * @param CompanyRelGeoIPCountryDto[] | null
+     *
+     * @return static
+     */
+    public function setRelCountries(?array $relCountries = null): self
+    {
+        $this->relCountries = $relCountries;
+
+        return $this;
+    }
+
+    /**
+     * @return CompanyRelGeoIPCountryDto[] | null
+     */
+    public function getRelCountries(): ?array
+    {
+        return $this->relCountries;
     }
 
     /**

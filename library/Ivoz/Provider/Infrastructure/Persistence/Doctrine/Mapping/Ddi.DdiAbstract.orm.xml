@@ -103,7 +103,7 @@
     </many-to-one>
     <many-to-one field="country" target-entity="Ivoz\Provider\Domain\Model\Country\CountryInterface" fetch="LAZY">
       <join-columns>
-        <join-column name="countryId" referenced-column-name="id" on-delete="CASCADE" nullable=""/>
+        <join-column name="countryId" referenced-column-name="id" on-delete="CASCADE" nullable="1" />
       </join-columns>
     </many-to-one>
     <many-to-one field="residentialDevice" target-entity="Ivoz\Provider\Domain\Model\ResidentialDevice\ResidentialDeviceInterface" inversed-by="ddis" fetch="LAZY">

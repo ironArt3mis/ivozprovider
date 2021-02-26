@@ -24,6 +24,7 @@ use Ivoz\Provider\Domain\Model\RatingProfile\RatingProfileInterface;
 use Ivoz\Provider\Domain\Model\MusicOnHold\MusicOnHoldInterface;
 use Ivoz\Provider\Domain\Model\Recording\RecordingInterface;
 use Ivoz\Provider\Domain\Model\FeaturesRelCompany\FeaturesRelCompanyInterface;
+use Ivoz\Provider\Domain\Model\CompanyRelGeoIPCountry\CompanyRelGeoIPCountryInterface;
 use Ivoz\Provider\Domain\Model\CompanyRelCodec\CompanyRelCodecInterface;
 use Ivoz\Provider\Domain\Model\CompanyRelRoutingTag\CompanyRelRoutingTagInterface;
 use Ivoz\Core\Domain\Model\LoggableEntityInterface;
@@ -404,9 +405,9 @@ interface CompanyInterface extends LoggableEntityInterface
     /**
      * Get country
      *
-     * @return \Ivoz\Provider\Domain\Model\Country\CountryInterface
+     * @return CountryInterface
      */
-    public function getCountry(): ?CountryInterface;
+    public function getCountry(): CountryInterface;
 
     /**
      * Get currency
@@ -781,6 +782,40 @@ interface CompanyInterface extends LoggableEntityInterface
      * @return FeaturesRelCompanyInterface[]
      */
     public function getRelFeatures(?Criteria $criteria = null): array;
+
+    /**
+     * Add relCountry
+     *
+     * @param CompanyRelGeoIPCountryInterface $relCountry
+     *
+     * @return static
+     */
+    public function addRelCountry(CompanyRelGeoIPCountryInterface $relCountry): CompanyInterface;
+
+    /**
+     * Remove relCountry
+     *
+     * @param CompanyRelGeoIPCountryInterface $relCountry
+     *
+     * @return static
+     */
+    public function removeRelCountry(CompanyRelGeoIPCountryInterface $relCountry): CompanyInterface;
+
+    /**
+     * Replace relCountries
+     *
+     * @param ArrayCollection $relCountries of CompanyRelGeoIPCountryInterface
+     *
+     * @return static
+     */
+    public function replaceRelCountries(ArrayCollection $relCountries): CompanyInterface;
+
+    /**
+     * Get relCountries
+     * @param Criteria | null $criteria
+     * @return CompanyRelGeoIPCountryInterface[]
+     */
+    public function getRelCountries(?Criteria $criteria = null): array;
 
     /**
      * Add relCodec
