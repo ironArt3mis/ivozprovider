@@ -256,7 +256,7 @@ class UpdateByTpCdrSpec extends ObjectBehavior
             TrunksCdr::class,
             [
                 'id' => 1,
-                'cgrid' => 2,
+                'cgrid' => '2',
             ]
         );
 
