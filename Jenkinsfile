@@ -39,11 +39,12 @@ pipeline {
                     expression { env.CHANGE_ID && pullRequest.labels.contains('ci-no-tests') == false }
                     branch "bleeding"
                     branch "artemis"
+                    branch "halliday"
                 }
             }
             agent {
                 docker {
-                    image 'ironartemis/ivozprovider-testing-base'
+                    image 'ironartemis/ivozprovider-testing-base:halliday'
                     args '--user jenkins --volume ${WORKSPACE}:/opt/irontec/ivozprovider'
                     reuseNode true
                 }
@@ -63,13 +64,14 @@ pipeline {
                     expression { env.CHANGE_ID && pullRequest.labels.contains('ci-no-tests') == false }
                     branch "bleeding"
                     branch "artemis"
+                    branch "halliday"
                 }
             }
             parallel {
                 stage ('app-console') {
                     agent {
                         docker {
-                            image 'ironartemis/ivozprovider-testing-base'
+                            image 'ironartemis/ivozprovider-testing-base:halliday'
                             args '--user jenkins --volume ${WORKSPACE}:/opt/irontec/ivozprovider'
                             reuseNode true
                         }
@@ -102,7 +104,7 @@ pipeline {
                 stage ('codestyle') {
                     agent {
                         docker {
-                            image 'ironartemis/ivozprovider-testing-base'
+                            image 'ironartemis/ivozprovider-testing-base:halliday'
                             args '--user jenkins --volume ${WORKSPACE}:/opt/irontec/ivozprovider'
                             reuseNode true
                         }
@@ -119,7 +121,7 @@ pipeline {
                 stage ('i18n') {
                     agent {
                         docker {
-                            image 'ironartemis/ivozprovider-testing-base'
+                            image 'ironartemis/ivozprovider-testing-base:halliday'
                             args '--user jenkins --volume ${WORKSPACE}:/opt/irontec/ivozprovider'
                             reuseNode true
                         }
@@ -135,7 +137,7 @@ pipeline {
                 stage ('phpspec') {
                     agent {
                         docker {
-                            image 'ironartemis/ivozprovider-testing-base'
+                            image 'ironartemis/ivozprovider-testing-base:halliday'
                             args '--user jenkins --volume ${WORKSPACE}:/opt/irontec/ivozprovider'
                             reuseNode true
                         }
@@ -151,7 +153,7 @@ pipeline {
                 stage ('api-platform') {
                     agent {
                         docker {
-                            image 'ironartemis/ivozprovider-testing-base'
+                            image 'ironartemis/ivozprovider-testing-base:halliday'
                             args '--user jenkins --volume ${WORKSPACE}:/opt/irontec/ivozprovider'
                             reuseNode true
                         }
@@ -168,7 +170,7 @@ pipeline {
                 stage ('api-brand') {
                     agent {
                         docker {
-                            image 'ironartemis/ivozprovider-testing-base'
+                            image 'ironartemis/ivozprovider-testing-base:halliday'
                             args '--user jenkins --volume ${WORKSPACE}:/opt/irontec/ivozprovider'
                             reuseNode true
                         }
@@ -185,7 +187,7 @@ pipeline {
                 stage ('api-client') {
                     agent {
                         docker {
-                            image 'ironartemis/ivozprovider-testing-base'
+                            image 'ironartemis/ivozprovider-testing-base:halliday'
                             args '--user jenkins --volume ${WORKSPACE}:/opt/irontec/ivozprovider'
                             reuseNode true
                         }
@@ -202,7 +204,7 @@ pipeline {
                 stage ('orm') {
                     agent {
                         docker {
-                            image 'ironartemis/ivozprovider-testing-base'
+                            image 'ironartemis/ivozprovider-testing-base:halliday'
                             args '--user jenkins --volume ${WORKSPACE}:/opt/irontec/ivozprovider'
                             reuseNode true
                         }
@@ -218,7 +220,7 @@ pipeline {
                 stage ('generators') {
                     agent {
                         docker {
-                            image 'ironartemis/ivozprovider-testing-base'
+                            image 'ironartemis/ivozprovider-testing-base:halliday'
                             args '--user jenkins --volume ${WORKSPACE}:/opt/irontec/ivozprovider'
                         }
                     }
@@ -240,7 +242,7 @@ pipeline {
                                     /* Wait until mysql service is up */
                                     sh 'while ! mysqladmin ping -hdata.ivozprovider.local --silent; do sleep 1; done'
                                 }
-                                docker.image('ironartemis/ivozprovider-testing-base')
+                                docker.image('ironartemis/ivozprovider-testing-base:halliday')
                                       .inside("--volume ${WORKSPACE}:/opt/irontec/ivozprovider --link ${c.id}:data.ivozprovider.local") {
                                     sh '/opt/irontec/ivozprovider/tests/docker/bin/prepare-and-run'
                                     sh '/opt/irontec/ivozprovider/schema/bin/test-schema'
@@ -289,7 +291,7 @@ void notifyFailureGithub() {
 }
 
 void notifyFailureMattermost() {
-    if (env.GIT_BRANCH == 'artemis' || env.GIT_BRANCH == 'bleeding') {
+    if (env.GIT_BRANCH == 'artemis' || env.GIT_BRANCH == 'bleeding' || env.GIT_BRANCH == 'halliday') {
         mattermostSend([
             channel: "#ivozprovider",
             color: "#FF0000",
@@ -299,7 +301,7 @@ void notifyFailureMattermost() {
 }
 
 void notifyFixedMattermost() {
-    if (env.GIT_BRANCH == 'artemis' || env.GIT_BRANCH == 'bleeding') {
+    if (env.GIT_BRANCH == 'artemis' || env.GIT_BRANCH == 'bleeding' || env.GIT_BRANCH == 'halliday') {
         mattermostSend([
             channel: "#ivozprovider",
             color: "#008000",
